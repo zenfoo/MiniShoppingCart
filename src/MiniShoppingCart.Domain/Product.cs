@@ -1,16 +1,22 @@
 ﻿namespace MiniShoppingCart.Domain
 {
+    using System;
+
     public class Product
     {
-        public Product(string name, string productId, decimal unitPrice)
+        // Private ctor for EF persistence
+        private Product()
+        {
+        }
+
+        public Product(string name, decimal unitPrice)
         {
             this.Name = name;
-            this.ProductId = productId;
             this.UnitPrice = unitPrice;
         }
 
+        public Guid? Id { get; private set; }
         public string Name { get; private set; }
-        public string ProductId { get; private set;  }
         public decimal UnitPrice { get; private set; }
     }
 }

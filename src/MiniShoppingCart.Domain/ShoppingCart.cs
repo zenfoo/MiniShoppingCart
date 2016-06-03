@@ -6,13 +6,29 @@
 
     public class ShoppingCart
     {
+        private ICollection<ShoppingCartItem> _items;
+
+        public Guid? Id { get; private set; }
+        public virtual Customer Customer { get; private set; }
+        public virtual ICollection<ShoppingCartItem> Items
+        {
+            get
+            {
+                return this._items ?? (this._items = new HashSet<ShoppingCartItem>());
+            }
+        }
+
         public DateTime Created { get; private set; }
         public DateTime Modified { get; private set; }
-        public IList<ShoppingCartItem> Items { get; private set; }
         
-        public ShoppingCart()
+        
+        private ShoppingCart()
         {
-            this.Items = new List<ShoppingCartItem>();
+        }
+
+        public ShoppingCart(Customer customer)
+        {
+            this.Customer = customer;
         }
 
         public void AddItem(ShoppingCartItem item)

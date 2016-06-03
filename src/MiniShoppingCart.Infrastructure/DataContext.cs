@@ -7,6 +7,8 @@
     public class DataContext : DbContext, IUnitOfWork
     {
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
         public DataContext(DbContextOptions options = null) : base(options)
         {

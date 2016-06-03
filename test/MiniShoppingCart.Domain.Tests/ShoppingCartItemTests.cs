@@ -9,7 +9,7 @@
         [Fact]
         public void GetFullName_ReturnsFullName()
         {
-            var product = new Product("Widget A", "71625", 2.5M);
+            var product = new Product("Widget A", 2.5M);
             var cartItem = new ShoppingCartItem(product, 2);
 
             var price = cartItem.GetTotalPrice();

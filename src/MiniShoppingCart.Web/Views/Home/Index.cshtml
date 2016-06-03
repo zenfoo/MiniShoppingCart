@@ -1,6 +1,23 @@
-﻿@model MiniShoppingCart.Domain.Customer
+﻿@model MiniShoppingCart.Web.ViewModels.HomePageViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<h2>Welcome, @Model.FirstName</h2>
+<h2>Welcome, @Model.User.FirstName</h2>
+
+<ul>
+    @foreach (var product in Model.Products)
+    {
+        using (Html.BeginForm())
+        {
+            <li>
+                <p>@product.Name</p>
+                <p><small>@product.UnitPrice.ToString("C")</small></p>
+                <input type="submit" name="Submit" value="Add to cart" />
+                <input type="hidden" name="ProductId" value="@product.Id" />
+            </li>
+        }
+    }
+</ul>
+
+<p>Your cart total is @Model.CartTotal.ToString("C")</p>

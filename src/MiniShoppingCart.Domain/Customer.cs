@@ -3,9 +3,7 @@
     using System;
 
     public class Customer
-    {
-        private ShoppingCart cart { get; set; }
-        
+    {   
         public Guid? Id { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
@@ -15,23 +13,13 @@
         public string City { get; private set; }
         public string State { get; private set; }
         public string Country { get; private set; }
-        public ShoppingCart Cart {  get
-            {
-                if (this.cart == null)
-                {
-                    this.cart = new ShoppingCart();
-                }
 
-                return this.Cart;
-            }
-        }
-
+        // Private ctor for EF persistence
         private Customer()
         {
         }
 
         public Customer(
-            Guid? id,
             string firstName,
             string lastName,
             string email,
@@ -39,9 +27,8 @@
             string address2,
             string city,
             string state,
-            string country)
+            string country) : this()
         {
-            this.Id = id;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Email = email;

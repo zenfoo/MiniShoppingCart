@@ -3,12 +3,13 @@
     using System;
     using MiniShoppingCart.Domain;
     using Xunit;
+
     public class ShoppingCartTests
     {
         [Fact]
         public void GetCartTotal_NoItems_ReturnsZero()
         {
-            var cart = new ShoppingCart();
+            var cart = new ShoppingCart(null);
 
             var totalPrice = cart.GetTotalPrice();
 
@@ -18,8 +19,8 @@
         [Fact]
         public void GetCartTotal_OneItem_ReturnsCorrectSum()
         {
-            var cart = new ShoppingCart();
-            var cartItem = new ShoppingCartItem(new Product("Widget A", "123412", 12.34M), 1);
+            var cart = new ShoppingCart(null);
+            var cartItem = new ShoppingCartItem(new Product("Widget A", 12.34M), 1);
             cart.AddItem(cartItem);
 
             var totalPrice = cart.GetTotalPrice();
@@ -30,8 +31,8 @@
         [Fact]
         public void GetCartTotal_TwoItems_ReturnsCorrectSum()
         {
-            var cart = new ShoppingCart();
-            cart.AddItem(new ShoppingCartItem(new Product("Widget A", "123412", 12.34M), 2));
+            var cart = new ShoppingCart(null);
+            cart.AddItem(new ShoppingCartItem(new Product("Widget A", 12.34M), 2));
 
             var totalPrice = cart.GetTotalPrice();
 
@@ -41,9 +42,9 @@
         [Fact]
         public void GetCartTotal_TwoProducts_ReturnsCorrectSum()
         {
-            var cart = new ShoppingCart();
-            cart.AddItem(new ShoppingCartItem(new Product("Widget A", "123412", 12.34M), 1));
-            cart.AddItem(new ShoppingCartItem(new Product("Widget B", "512312", 10.44M), 1));
+            var cart = new ShoppingCart(null);
+            cart.AddItem(new ShoppingCartItem(new Product("Widget A", 12.34M), 1));
+            cart.AddItem(new ShoppingCartItem(new Product("Widget B", 10.44M), 1));
 
             var totalPrice = cart.GetTotalPrice();
 

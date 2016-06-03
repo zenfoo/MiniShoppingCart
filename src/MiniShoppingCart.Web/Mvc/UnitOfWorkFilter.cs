@@ -1,4 +1,4 @@
-namespace MiniShoppingCart.Mvc
+namespace MiniShoppingCart.Web.Mvc
 {
     using Infrastructure;
     using Microsoft.AspNetCore.Mvc.Filters;
