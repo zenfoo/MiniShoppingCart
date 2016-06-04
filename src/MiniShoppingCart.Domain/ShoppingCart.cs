@@ -9,7 +9,6 @@
         private ICollection<ShoppingCartItem> _items;
 
         public Guid? Id { get; private set; }
-        public virtual Customer Customer { get; private set; }
         public virtual ICollection<ShoppingCartItem> Items
         {
             get
@@ -22,15 +21,10 @@
         public DateTime Modified { get; private set; }
         
         
-        private ShoppingCart()
+        public ShoppingCart()
         {
         }
-
-        public ShoppingCart(Customer customer)
-        {
-            this.Customer = customer;
-        }
-
+        
         public void AddItem(ShoppingCartItem item)
         {
             this.Items.Add(item);
