@@ -3,7 +3,9 @@
     using System;
 
     public class Customer
-    {   
+    {
+        private ShoppingCart _shoppingCart;
+
         public Guid? Id { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
@@ -13,6 +15,17 @@
         public string City { get; private set; }
         public string State { get; private set; }
         public string Country { get; private set; }
+        public virtual ShoppingCart ShoppingCart {
+            get
+            {
+                return this._shoppingCart ?? (this._shoppingCart = new ShoppingCart());
+            }
+
+            private set
+            {
+                this._shoppingCart = value;
+            }
+        }
 
         // Private ctor for EF persistence
         private Customer()

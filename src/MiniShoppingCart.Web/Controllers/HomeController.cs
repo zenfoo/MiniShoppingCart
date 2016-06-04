@@ -34,18 +34,18 @@
                 // TODO: The query logic should be pushed back into a service layer
                 var selectedProduct = uow.Products.SingleOrDefault(p => p.Id == viewModel.ProductId);
                 if (selectedProduct != null) {
+
                     // Trivial example, there is only one customer in the system and we will only select 1 item at a time
-                    var carts = uow.ShoppingCarts
-                        .Include(c => c.Items)
-                        .ThenInclude(sci => sci.Product);
-                    var cart = carts.FirstOrDefault();
-                    if (cart == null)
-                    {
-                        cart = new ShoppingCart(uow.Customers.FirstOrDefault());
-                        uow.ShoppingCarts.Add(cart);
-                    }
-                    cart.AddItem(new ShoppingCartItem(selectedProduct, 1));
-                    viewModel.CartTotal = cart.GetTotalPrice();
+
+                    // Retrieve entire customer and shopping cart
+                    var customer = uow.Customers
+                        .Include(c => c.ShoppingCart)
+                        .ThenInclude(sc => sc.Items)
+                        .ThenInclude(i => i.Product)
+                        .FirstOrDefault();
+
+                    customer.ShoppingCart.AddItem(new ShoppingCartItem(selectedProduct, 1));
+                    viewModel.CartTotal = customer.ShoppingCart.GetTotalPrice();
                     uow.SaveChanges();
                 }
             }
